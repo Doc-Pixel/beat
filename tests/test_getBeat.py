@@ -14,11 +14,6 @@ from web3.exceptions import ValidationError
 def beat_contract(getBeat, accounts, scope="module", autouse=True):
     yield accounts[0].deploy(getBeat)
 
-# @pytest.fixture(autouse=True)
-# def isolation(fn_isolation):
-#     pass
-
-
 ##### tests #####
 
 def test_initial_state(beat_contract):
@@ -34,12 +29,3 @@ def test_initial_state(beat_contract):
 
 def test_kill(beat_contract):
     tx = beat_contract.disable()
-
-    # tx = beat_contract.getBeat(1653085620)
-    # assert type(tx.return_value) == class 'NoneType'
-    
-# def test_killed(beat_contract):
-#     tx = beat_contract.getBeat()
-#     # assert tx.block_number != 2349805423905
-#     assert len(history[0].subcalls) == 12312321
-#     # assert tx.selfdestruct
