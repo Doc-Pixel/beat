@@ -36,4 +36,4 @@ def disable():
     """
 
     assert msg.sender == self.owner, "Only the owner can call this function"
-    selfdestruct(owner)
+    selfdestruct(self.owner)
