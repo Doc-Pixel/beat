@@ -15,7 +15,7 @@ def __init__():
 
 @external
 # @view
-def getBeat(unixTime: uint256=block.timestamp) -> decimal:
+def getBeat(unixTime: uint256=block.timestamp) -> uint256:
     """
     @dev get the current beat time or calculate the beat time for the provided utcTime
     @param unixTime optional parameter utcTime to convert to beat. Otherwise use block.timestamp as default
@@ -27,7 +27,7 @@ def getBeat(unixTime: uint256=block.timestamp) -> decimal:
     dayDiff: decimal = epochDays - epochWholeDays
     partialDayInSeconds: decimal = secondsPerDay * dayDiff
     beatTime : decimal =  (partialDayInSeconds / 86.4)  
-    return beatTime
+    return floor(beatTime)
 
 @external
 def disable():
