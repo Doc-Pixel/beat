@@ -1,6 +1,6 @@
 # @version >=0.3.3
 """
-@dev Swatch beat time oracle. Based on the current block timestamp. could be 15 seconds off
+@dev Swatch beat time oracle. Based on the current block timestamp. accuracy depends on block time, about 12 seconds off
 @author Dr. Pixel (github: @Doc-Pixel)
 """
 
@@ -36,4 +36,4 @@ def disable():
     """
 
     assert msg.sender == self.owner, "Only the owner can call this function"
-    selfdestruct(ZERO_ADDRESS)
+    selfdestruct(owner)
