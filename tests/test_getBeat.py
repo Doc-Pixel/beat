@@ -23,4 +23,6 @@ def test_initial_state(beat_contract):
     assert floor(beat_contract.getBeat(1653085620)) == 977
 
 def test_kill(beat_contract):
-    tx = beat_contract.disable()
+    with brownie.reverts():
+        beat_contract.disable({"from": accounts[1]})
+    beat_contract.disable()

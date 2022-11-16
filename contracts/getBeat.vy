@@ -5,6 +5,7 @@
 """
 
 owner: address
+SECONDS_PER_DAY: constant(decimal) = 86400.00  
 
 @external
 def __init__():
@@ -20,12 +21,12 @@ def getBeat(unixTime: uint256=block.timestamp) -> uint256:
     @dev get the current beat time or calculate the beat time for the provided utcTime
     @param unixTime optional parameter utcTime to convert to beat. Otherwise use block.timestamp as default
     """
-    secondsPerDay: decimal = 86400.00  
+    
     epoch: decimal = convert(unixTime + 3600, decimal)  
-    epochDays: decimal = epoch / secondsPerDay
+    epochDays: decimal = epoch / SECONDS_PER_DAY
     epochWholeDays: decimal = convert(floor(epochDays), decimal)
     dayDiff: decimal = epochDays - epochWholeDays
-    partialDayInSeconds: decimal = secondsPerDay * dayDiff
+    partialDayInSeconds: decimal = SECONDS_PER_DAY * dayDiff
     beatTime : decimal =  (partialDayInSeconds / 86.4)  
     return convert(floor(beatTime), uint256)
 
