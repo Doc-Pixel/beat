@@ -18,14 +18,9 @@ def beat_contract(getBeat, accounts, scope="module", autouse=True):
 
 def test_initial_state(beat_contract):
     # check if it handles current time
-    tx = beat_contract.getBeat()
-    beatTime = tx.return_value
-    assert beatTime <= 999
-
-    # check if it returns a correct value for a passed unixTime (epoch)
-    tx = beat_contract.getBeat(1653085620)
-    beatTime = tx.return_value
-    assert floor(beatTime) == 977
+    assert beat_contract.getBeat() <= 999
+    assert beat_contract.getBeat() == beat_contract.getBeat(chain.time())
+    assert floor(beat_contract.getBeat(1653085620)) == 977
 
 def test_kill(beat_contract):
     tx = beat_contract.disable()

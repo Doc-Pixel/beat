@@ -14,7 +14,7 @@ def __init__():
     self.owner = msg.sender
 
 @external
-# @view
+@view
 def getBeat(unixTime: uint256=block.timestamp) -> uint256:
     """
     @dev get the current beat time or calculate the beat time for the provided utcTime
@@ -27,7 +27,7 @@ def getBeat(unixTime: uint256=block.timestamp) -> uint256:
     dayDiff: decimal = epochDays - epochWholeDays
     partialDayInSeconds: decimal = secondsPerDay * dayDiff
     beatTime : decimal =  (partialDayInSeconds / 86.4)  
-    return floor(beatTime)
+    return convert(floor(beatTime), uint256)
 
 @external
 def disable():
