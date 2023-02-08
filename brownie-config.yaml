@@ -1,4 +1,0 @@
-dotenv: .env
-
-networks:
-  default: polygon-test

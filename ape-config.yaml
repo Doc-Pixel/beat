@@ -1,0 +1,16 @@
+name: beat
+
+number_of_accounts: 5
+
+plugins:
+  - name: infura
+  - name: alchemy
+  - name: vyper
+  - name: ens
+  - name: etherscan 
+  - name: hardhat
+
+# ethereum:
+#   default_network: mainnet-fork
+#   mainnet_fork:
+#     default_provider: hardhat

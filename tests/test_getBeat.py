@@ -2,8 +2,8 @@
 # brownie test
 from math import floor
 import pytest
-import brownie
-from brownie import ZERO_ADDRESS, accounts, chain, history
+import ape
+from ape import accounts, chain
 from web3.exceptions import ValidationError
 
 # swatch Beat time oracle
@@ -11,18 +11,29 @@ from web3.exceptions import ValidationError
 
 ##### test fixtures #####
 @pytest.fixture
-def beat_contract(getBeat, accounts, scope="module", autouse=True):
-    yield accounts[0].deploy(getBeat)
+def owner(accounts):
+    return accounts[0]
 
+@pytest.fixture
+def not_owner(accounts):
+    return accounts[1]
+# @pytest.fixture
+# def beat_contract(getBeat, accounts, scope="module", autouse=True):
+#     yield accounts[0].deploy(getBeat)
+
+
+@pytest.fixture
+def beat_contract(project, owner):
+   return owner.deploy(project.getBeat)
 ##### tests #####
 
 def test_initial_state(beat_contract):
     # check if it handles current time
     assert beat_contract.getBeat() <= 999
-    assert beat_contract.getBeat() == beat_contract.getBeat(chain.time())
+    assert beat_contract.getBeat() == beat_contract.getBeat(chain.pending_timestamp)
     assert floor(beat_contract.getBeat(1653085620)) == 977
 
-def test_kill(beat_contract):
-    with brownie.reverts():
-        beat_contract.disable({"from": accounts[1]})
-    beat_contract.disable()
+def test_kill(beat_contract, owner, not_owner):
+    with ape.reverts():
+        beat_contract.disable(sender=not_owner)
+    beat_contract.disable(sender=owner)
