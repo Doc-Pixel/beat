@@ -1,0 +1,15 @@
+{
+  "contracts": {
+    "getBeat": "662754072be1fbb9480bf9fcf3a471d2f9c26ce8"
+  },
+  "tests": {
+    "tests/test_getBeat.py": {
+      "coverage": false,
+      "isolated": false,
+      "results": ".F",
+      "sha1": "9e406e1f25ba800185b43b6645f5e8e378534c8e",
+      "txhash": []
+    }
+  },
+  "tx": {}
+}
