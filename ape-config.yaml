@@ -1,6 +1,8 @@
 name: beat
 
-number_of_accounts: 5
+default_ecosystem: ethereum
+
+# number_of_accounts: 5
 
 plugins:
   - name: infura
@@ -8,9 +10,29 @@ plugins:
   - name: vyper
   - name: ens
   - name: etherscan 
-  - name: hardhat
+  # - name: hardhat
 
-# ethereum:
-#   default_network: mainnet-fork
-#   mainnet_fork:
-#     default_provider: hardhat
+vyper:
+  evm_version: istanbul
+
+
+geth:
+  ethereum:
+    mainnet:
+      uri: http://5.9.54.235:8545
+      chain_id: 109
+
+
+geth:
+  shibarium:
+    mainnet:
+      uri: http://5.9.54.235:8545
+      chain_id: 109
+
+hardhat:
+  request_timeout: 30  # Defaults to 30
+  fork_request_timeout: 600  # Defaults to 300
+  fork:
+    ethereum:
+      mainnet:
+        upstream_provider: geth

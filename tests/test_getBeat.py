@@ -1,6 +1,6 @@
-
 # brownie test
 from math import floor
+from unicodedata import decimal
 import pytest
 import ape
 from ape import accounts, chain
@@ -8,6 +8,9 @@ from web3.exceptions import ValidationError
 
 # swatch Beat time oracle
 # @author Dr. Pixel (github: @Doc-Pixel)
+
+system_name = 'beat'
+units = 1000
 
 ##### test fixtures #####
 @pytest.fixture
@@ -24,7 +27,7 @@ def not_owner(accounts):
 
 @pytest.fixture
 def beat_contract(project, owner):
-   return owner.deploy(project.getBeat)
+   return owner.deploy(project.getBeat, units, system_name)
 ##### tests #####
 
 def test_initial_state(beat_contract):
